@@ -1,3 +1,10 @@
+# 1.0.0 (2023-11-04)
+
+
+### Features
+
+* init ([2547dcb](https://github.com/YU000jp/logseq-plugin-preview-image/commit/2547dcb00453375204c5788e1d2c3656da66411f))
+
 # [1.2.0](https://github.com/b-yp/logseq-preview-footnote/compare/v1.1.1...v1.2.0) (2023-10-30)
 
 
