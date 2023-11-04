@@ -1,42 +1,23 @@
-# logseq-preview-footnote plugin
+# Logseq Plugin: Preview Image
 
-[English](https://github.com/b-yp/logseq-preview-footnote) | [中文](https://github.com/b-yp/logseq-preview-footnote/blob/main/README.chCN.md) | [日本語](https://github.com/b-yp/logseq-preview-footnote/blob/main/README.ja.md)
+[English](https://github.com/YU000jp/logseq-plugin-preview-image) | [日本語](https://github.com/YU000jp/logseq-plugin-preview-image/blob/main/README.ja.md)
 
-Provides previews of footnotes.
+Displays images on each page in a small size and displays a preview when hover over it.
 
 ## Overview
 
 * When the cursor hovers over a footnote in content, it previews the content in the heading block.
 * Copying and displaying content that should be displayed in another block.
 
-## Dependencies
-
-* Logseq plugin > [logseq-footnotes-plugin](https://github.com/gremi-jr/logseq-footnote-plugin) (form Logseq Marketplace)
-   - A plugin that provides a slash command ( "`/Add Footnote`" ) for creating footnotes. Runs at the current cursor position and creates a heading in the footnote block.
-
 ## Usage
 
-  1. Install `Preview Footnote` plugin (form Logseq Marketplace)
+  1. Install `Preview` plugin (form Logseq Marketplace)
   1. Create a footnote in a block somewhere.
   1. Hover your mouse over a footnote to see a preview
 
 ## Demo
 
-- From creating a footnote to displaying a preview
-
-   ![image](https://github.com/b-yp/logseq-preview-footnote/raw/main/demo/footnote.gif)
-
-<details>
-  <summary>.mp4 movie</summary>
-  <video src="https://github.com/b-yp/logseq-preview-footnote/raw/main/demo/Kapture%202023-10-22%20at%2017.47.59.mp4" controls />
-</details>
-
 ## Plugin Settings
-
-- Expand the block that starts with "## Footnotes"
-  - To show the preview, the block must be expanded. Automatically expand the block.
-  - `true` default
-  - `false`
 
 - Close the preview when mouse leaves it
   - If this setting is disabled, the preview will not disappear. You will need to close it manually. This setting has no effect after 4 seconds.
@@ -76,4 +57,4 @@ Provides previews of footnotes.
 
 License > [MIT](https://choosealicense.com/licenses/mit/)
 
-Author > [@b-yp](https://github.com/b-yp)
+Author > [@YU000jp](https://github.com/YU000jp)
