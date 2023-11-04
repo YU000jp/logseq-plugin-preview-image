@@ -37,7 +37,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     type: "boolean",
     title: t("Close the preview when mouse leave it"),
     description: t(
-      "If this setting is disabled, the preview will not disappear. You will need to close it manually. This setting has no effect after that 4 seconds."
+      "If this setting is disabled, the preview will not disappear. You will need to close it manually."
     ),
     default: true,
   },
