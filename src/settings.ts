@@ -20,7 +20,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     type: "enum",
     title: t("Mouse enter ms delay (The shortest time to appear)"),
     description: t("Delay before opening preview"),
-    default: "2200",
+    default: "1400",
     enumChoices: [
       "1200",
       "1400",
@@ -43,7 +43,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   },
   {
     // mouse leave ms delay
-    key: "CloseMouseLeaveDelay",
+    key: "closeMouseLeaveDelay",
     type: "enum",
     title: t("Mouse leave ms delay (The shortest time to disappear)"),
     description: t("Delay before closing preview"),

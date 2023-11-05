@@ -2,29 +2,30 @@ import { t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { key } from "./"
 
 
-// model function
 /**
- * Handles the preview of a image when the user hovers over it.
- * @param element - The HTML element of the image.
- * @param event - The mouse event that triggered the preview.
- * @returns void
+ * Handles the preview of an HTML element.
+ * @param element - The HTML element to preview.
+ * @param left - The left position of the preview.
+ * @param top - The top position of the preview.
+ * @param flag - An object containing a flag to indicate if the preview is for a block.
+ * @returns A Promise that resolves when the preview is handled.
  */
-export const handlePreview = async (element: HTMLImageElement, event: MouseEvent) => {
+export const handlePreview = async (element: HTMLElement, left: number, top: number, flag: { isPreviewBlock?: boolean, uuid?: string }) => {
 
-  if (logseq.settings!.previewImage === false) return
+  if (logseq.settings!.previewImage === false // プレビューを無効にする設定項目
+    && flag.isPreviewBlock !== true) return // ブロックのプレビューであることを示すフラグ
 
-  // random key 4桁
-  const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+  // random key 複数のプレビューを開くことができるようにする設定項目
   const UIKey = logseq.settings!.limitPreview === true
     ? key
-    : random
+    : Math.floor(Math.random() * 10000).toString().padStart(4, '0')
 
   // preview UI
   const maxWidth = logseq.settings!.maxWidth * 10 + 200
   logseq.provideUI({
     key: UIKey,
     template: `
-            <div style="padding: 8px; overflow: auto;" title="">
+            <div title="">
               <div>
               ${element.outerHTML}
               </div>
@@ -33,21 +34,18 @@ export const handlePreview = async (element: HTMLImageElement, event: MouseEvent
         ? ""
         : `
             <style>
-              body>div[data-ref="${logseq.baseInfo.id}"]:hover {
-                outline: 6px solid var(--ls-quaternary-background-color);
-                outline-offset: 6px;
-              }
               /* YouTube preview optimization */
-              body>div#${logseq.baseInfo.id}--${UIKey} div.is-paragraph:has(>iframe[src*="youtube"]) {
+              body>div#${logseq.baseInfo.id}--${UIKey}>div.ls-ui-float-content>div:has(iframe[src*="youtube"]) {
                 position: relative;
                 min-height: 330px;
                 min-width: 588px;
                 width:100%;
                 height:0;
+                overflow: auto;
                 padding-top: 56.25%;
                 margin-bottom: 1em;
               
-                &>iframe[src*="youtube"] {
+                & iframe[src*="youtube"] {
                   position: absolute;
                   top: 0;
                   left: 0;
@@ -55,16 +53,27 @@ export const handlePreview = async (element: HTMLImageElement, event: MouseEvent
                   height: 100%;
                 }
               }
+              ${flag.uuid ? `
+              body>div#root>div {
+                &.light-theme>main>div span#dot-${flag.uuid}{
+                    outline: 2px solid var(--ls-link-ref-text-color);
+                }
+                &.dark-theme>main>div span#dot-${flag.uuid}{
+                    outline: 2px solid aliceblue;
+                }
+              }
+              ` : ""}
             </style>
             `}
           `,
 
     style: {
-      left: `${event.clientX}px`,
-      top: `${event.clientY + 20}px`,
+      left: `${left}px`,
+      top: `${top}px`,
       width: "auto",
       minWidth: "200px",
       maxWidth: `${maxWidth}px`,
+      minHeight: "90px",
       height: "auto",
       padding: ".1em",
       backgroundColor: "var(--ls-primary-background-color)",
@@ -76,9 +85,13 @@ export const handlePreview = async (element: HTMLImageElement, event: MouseEvent
     },
   })
 
-  // close the preview when mouse leave it
-  if (logseq.settings!.closePreviewMouseLeave === true)
-    closePreviewMouseLeave(UIKey)
+  setTimeout(() => {
+    // close the preview when mouse leave it
+    if (logseq.settings!.closePreviewMouseLeave === true
+      && flag.isPreviewBlock !== true) // ブロックのプレビューであることを示すフラグがオフの場合のみ
+      closePreviewMouseLeave(UIKey)
+  }, 50)
+
 }
 
 
@@ -86,16 +99,30 @@ export const handlePreview = async (element: HTMLImageElement, event: MouseEvent
  * Closes the preview when the mouse leaves the preview element.
  * @param UIkey - The unique identifier of the preview element.
  */
-export const closePreviewMouseLeave = (UIkey: string) => setTimeout(() => {
-  const ele = parent.document.querySelector(
-    `body>div#${logseq.baseInfo.id}--${UIkey}`
-  ) as HTMLDivElement | null
-  if (ele === null) return
-  ele.addEventListener("mouseleave", eventListener, { once: true })
-  setTimeout(() => ele.removeEventListener("mouseleave", eventListener),
-    logseq.settings!.timeUntilOff)
-  function eventListener(this: HTMLElement) {
-    this.remove()
-  }
-}, Number(logseq.settings!.CloseMouseLeaveDelay | 10))
+const closePreviewMouseLeave = (UIkey: string) => {
 
+  const ele = parent.document.querySelector(`body>div#${logseq.baseInfo.id}--${UIkey}`) as HTMLDivElement | null
+  if (ele === null) return
+
+  ele.style.cursor = "grab"
+  ele.title = ""
+
+  setTimeout(() => {
+
+    ele.style.cursor = "zoom-out"
+    // マウスが離れたときにプレビューを閉じる
+    ele.addEventListener("mouseleave", eventListener, { once: true })
+
+    function eventListener(this: HTMLElement) {
+      this.remove()
+      clearTimeout(time)
+    }
+
+    // マウスが離れた時にプレビューを閉じる、という動作をキャンセルする
+    const time = setTimeout(() => {
+      ele.style.cursor = "unset"
+      if (ele) ele.removeEventListener("mouseleave", eventListener)
+    }, logseq.settings!.timeUntilOff as number) // ms
+
+  }, Number(logseq.settings!.closeMouseLeaveDelay as number))
+}

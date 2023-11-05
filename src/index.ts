@@ -1,7 +1,9 @@
 import "@logseq/libs"
-import { setup as l10nSetup } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
+import { setup as l10nSetup, t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { pluginSettings } from "./settings"
 import { handlePreview } from "./handlePreview"
+import { previewBlock } from "./previewBlock"
+import { clear } from "console"
 
 // import af from "./translations/af.json";
 // import de from "./translations/de.json";
@@ -23,7 +25,7 @@ import { handlePreview } from "./handlePreview"
 // import zhCN from "./translations/zh-CN.json";
 // import zhHant from "./translations/zh-Hant.json";
 const pluginId = logseq.baseInfo.id
-export const key = "preview-image-dialog"
+export const key = "dialog"
 
 let processing = false // prevent duplicate call
 
@@ -31,7 +33,7 @@ let processing = false // prevent duplicate call
  * Initializes previews for images.
  * @param flag - An optional object containing a `pageLoad` boolean flag to indicate if the page is being loaded.
  */
-const init = (flag?: { pageLoad?: boolean }) => {
+const init = (flag: { pageLoad?: boolean }, nodeList?: NodeListOf<HTMLElement>) => {
   if (
     flag &&
     flag.pageLoad === true &&
@@ -45,112 +47,101 @@ const init = (flag?: { pageLoad?: boolean }) => {
 
   if (processing) return // prevent duplicate call
 
-  const fns = parent.document.body.querySelectorAll(
+  const fns = nodeList ? nodeList : parent.document.body.querySelectorAll(
     'div#root>div>main>div#app-container div.asset-container>img:not([data-image="true"])'
   ) as NodeListOf<HTMLImageElement> //target list of images
   if (fns.length === 0) return // no image
 
   processing = true // prevent duplicate call
-
-
-  query() // query for new images
+  setTimeout(() => processing = false, 50) // prevent duplicate call
 
 
   for (const targetElement of fns) {
 
-    // null means the image is not defined or collapsed
-    if (targetElement === null) continue
-
     // flag for editing block
     targetElement.dataset.image = "true"
 
-    // add event listener
-    const mouseOver = (element: HTMLImageElement) => {
-      element.addEventListener(
-        "mouseenter",
-        function (this: HTMLImageElement, e: MouseEvent) {
-          // show preview
-          setTimeout(() => {
-            if ((parent.document.querySelector(`body>div[data-ref="${logseq.baseInfo.id}"]`) as Node | null)// if the preview is already open
-              && logseq.settings!.limitPreview === true) return
-            // limit the number of previews to one
-            else
-              handlePreview(this, e) // show preview
-          }, 1000)
-        },
-        { once: true }
-      )
-
-      element.addEventListener(
-        "mouseleave",
-        () => { // Close the preview when mouse leave it
-          setTimeout(() => mouseOver(element), 2000) // event listener
-        }, { once: true }
-      )
-    }
-
-    // targetElementにマウスが乗ってから1秒後にmouseOverを実行
-    targetElement.addEventListener("mouseenter", function (this: HTMLImageElement) {
-      setTimeout(() => mouseOver(this), 1000)// first time
+    // flag for mouseleave event
+    let mouseLeave = false
+    targetElement.addEventListener("mouseleave", () => {
+      mouseLeave = true
+      targetElement.style.cursor = "unset"
+      targetElement.title = ""
     }, { once: true })
-  }
 
-  processing = false // prevent duplicate call
-}
+    targetElement.addEventListener("mouseover", function (this: HTMLElement, event: MouseEvent) {
+
+      this.style.cursor = "wait"
+      // logseq.settings!.closeMouseLeaveDelay ms待機後にプレビューを表示する
+      this.title = t("Wait for a while to show the preview.")
+
+      // 3秒間待つ
+      const time = setTimeout(() => {
+
+          this.style.cursor = "unset"
+          this.title = ""
+        if ((parent.document.querySelector(`body>div[data-ref="${logseq.baseInfo.id}"]`) as Node | null)// if the preview is already open
+          // limit the number of previews to one
+          && logseq.settings!.limitPreview === true) {
+
+          return
+        } else {
+
+          if (mouseLeave) {
+            mouseLeave = false
+            return
+          }
+
+          clearTimeout(time)
+
+          // show preview
+          handlePreview(this, event.clientX, event.clientY + 20, {})
+
+        }
+      }, logseq.settings!.closeMouseLeaveDelay as number)
+
+    })
+
+  } //end for
+} //end init
+
+
+let processingQuery = false // prevent duplicate call
 
 // observer function
 const observer = () => {
   /**
    * Selects the target node in the DOM tree using a CSS selector and returns it as a Node object.
-   *
    * @returns The target node as a Node object.
    */
-  const targetNode = parent.document.querySelector(
-    "body>div#root>div>main>div#app-container"
-  ) as Node
+  const targetNode = parent.document.querySelector("body>div#root>div>main>div#app-container") as Node
+
   const observer = new MutationObserver(() => {
 
-    query()
+    if (processingQuery) return // prevent duplicate call
+    processingQuery = true
+    setTimeout(() => processingQuery = false, 50) // 失敗したときのためにsetTimeoutでフラグを立てておく
+
+    const nodeList = parent.document.body.querySelectorAll(
+      'div#root>div>main>div#app-container div.asset-container>img:not([data-image="true"])'
+    ) as NodeListOf<HTMLElement> //target list of images
+
+    if (nodeList.length !== 0) init({}, nodeList)
 
     observer.disconnect()
     setTimeout(
       () => observer.observe(targetNode, { childList: true, subtree: true }),
-      500
+      100
     )
   })
 
   // observer for all blocks (for the first time)
-  setTimeout(
-    () => observer.observe(targetNode, { childList: true, subtree: true }),
-    3000
-  )
+  observer.observe(targetNode, { childList: true, subtree: true })
 
   // logseq beforeunload event (plugin off)
   logseq.beforeunload(async () => {
     observer.disconnect()
   })
-}
-
-
-let processingQuery = false // prevent duplicate call
-const query = async () => {
-  if (processingQuery) return // prevent duplicate call
-  setTimeout(() => processingQuery = true, 300) // 失敗したときのためにsetTimeoutでフラグを立てておく
-
-  const fns = parent.document.body.querySelectorAll(
-    'div#root>div>main>div#app-container div.asset-container>img:not([data-image="true"])'
-  ) as NodeListOf<Element>
-  if (fns.length === 0) return // no image
-
-  // logseq.UI.showMsg(
-  //   t("Checked images") + "\n\nPreview Image"  + t("plugin"),
-  //   "success",
-  //   {
-  //     timeout: 2200,
-  //   }
-  // ) // show message
-  init()
-
 }
 
 
@@ -196,6 +187,18 @@ const main = async () => {
 
   // observer for all blocks
   observer()
+
+  // preview block
+  previewBlock()
+
+  logseq.provideStyle(`
+  body>div[data-ref="${logseq.baseInfo.id}"]:hover {
+    outline: 6px solid var(--ls-quaternary-background-color);
+    outline-offset: 6px;
+  }
+`)
+
 } //end main
+
 
 logseq.ready(main).catch(console.error)
