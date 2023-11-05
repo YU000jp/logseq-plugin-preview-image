@@ -17,7 +17,7 @@
 
 1. Install the `Preview Image` plugin (available from the Logseq Marketplace).
 1. Place an image in a regular block.
-1. Hover your mouse over the image to see a preview.
+1. Hover the mouse over the image to see a preview.
 
 ## Plugin Settings
 
