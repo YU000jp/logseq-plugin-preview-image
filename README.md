@@ -2,59 +2,69 @@
 
 [English](https://github.com/YU000jp/logseq-plugin-preview-image) | [日本語](https://github.com/YU000jp/logseq-plugin-preview-image/blob/main/README.ja.md)
 
-Displays images on each page in a small size and displays a preview when hover over it.
-
-## Overview
-
-* When the cursor hovers over a footnote in content, it previews the content in the heading block.
-* Copying and displaying content that should be displayed in another block.
-
-## Usage
-
-  1. Install `Preview` plugin (form Logseq Marketplace)
-  1. Create a footnote in a block somewhere.
-  1. Hover your mouse over a footnote to see a preview
+1. Set size restrictions for large images.
+2. Hover over an image to view a larger preview.
 
 ## Demo
 
+## Usage
+
+1. Install the `Preview Image` plugin (available from the Logseq Marketplace).
+2. Place an image in a regular block.
+3. Hover your mouse over the image to see a preview.
+
 ## Plugin Settings
 
-- Close the preview when mouse leaves it
-  - If this setting is disabled, the preview will not disappear. You will need to close it manually. This setting has no effect after 4 seconds.
-  - `false` default
-  - `true`
+- "Limit Size for Large Images" Feature > Enabled
+  - `true` (default)
+  - `false` > Normal maximum size
 
-- Mouse leave ms delay (The shortest time to disappear)
-  - Delay before closing the preview.
-  - `600`
-  - `800`
-  - `1000`
-  - `1200` default
-  - `1400`
-  - `1600`
-  - `1800`
-  - `2000`
-  - `2500`
+- "Journal > Width > Maximum Large Image Size"
+  - `45` (default)
+  - `300` < `660` (default) < `800` [px]
 
-- Limit the number of previews to one
-  - `false` > You can display multiple previews.
-  - `true` default
-  - `false`
+- "Page > Width > Maximum Large Image Size"
+  - `45` (default)
+  - `300` < `1050` (default) < `1200` [px]
 
-- Close the preview when opening another page
-  - `false` > The preview will be retained even if you open another page.
-  - `true` default
-  - `false`
+- "Image Preview" Feature > Enabled
+  - `true` (default)
+  - `false` > Normal maximum size
 
-- Maximum width of the preview
-  - 200px < 1200px
-  - `600` default
+- "[ms] Mouse Hover Delay (Minimum time to display)"
+  - `1400` (default)
+  - `1200`, `1400`, `1800`, `2200`, `2600`, `3000`, `3400`
 
-- Enable YouTube preview optimization
-  - `true` default
+- "Close Preview when Mouse Moves Away"
+  - `true` (default)
+  - `false` > Must close manually.
 
-## Info
+- "[ms] Mouse Move Away Delay (Minimum time to disappear)"
+  - `1400` (default)
+  - `1200`, `1400`, `1600`, `1800`, `2000`
 
-License > [MIT](https://choosealicense.com/licenses/mit/)
+- "[ms] Time Before Mouse Move Doesn't Disappear"
+  - `3500` (default)
+  - `2500`, `3000`, `3500`, `4000`, `4500`, `5000`, `5500`, `6000`
 
-Author > [@YU000jp](https://github.com/YU000jp)
+- Limit Number of Previews
+  - `true` (default)
+  - `false` > Display multiple previews.
+
+- Close Preview when Opening Another Page
+  - `true` (default)
+  - `false` > Keep the preview open when opening another page.
+
+- Maximum Width for Previews
+  - `60` (default)
+  - 400px < 1200px
+
+- Enable YouTube Preview Optimization
+  - `true` (default)
+  - `false` > Normal maximum size
+
+## Information
+
+Icon > [icooon-mono.com](https://icooon-mono.com/00039-%e6%a4%9c%e7%b4%a2%e7%94%a8%e3%81%ae%e8%99%ab%e7%9c%bc%e9%8f%a1%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3%e7%b4%a0%e6%9d%90/)
+
+Creator > [@YU000jp](https://github.com/YU000jp)
