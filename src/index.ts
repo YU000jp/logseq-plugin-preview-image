@@ -1,10 +1,10 @@
 import "@logseq/libs"
-import { setup as l10nSetup, t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
-import { pluginSettings } from "./settings"
+import { LSPluginBaseInfo } from "@logseq/libs/dist/LSPlugin.user"
+import { t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { handlePreview } from "./handlePreview"
+import { CSSimageSize, calcRangeBarForSettingOnce, removeProvideStyle } from "./lib"
 import { previewBlock } from "./previewBlock"
-import { clear } from "console"
-
+import { pluginSettings } from "./settings"
 // import af from "./translations/af.json";
 // import de from "./translations/de.json";
 // import es from "./translations/es.json";
@@ -26,6 +26,8 @@ import { clear } from "console"
 // import zhHant from "./translations/zh-Hant.json";
 const pluginId = logseq.baseInfo.id
 export const key = "dialog"
+const keyImageSize = "imageSize"
+
 
 let processing = false // prevent duplicate call
 
@@ -78,8 +80,8 @@ const init = (flag: { pageLoad?: boolean }, nodeList?: NodeListOf<HTMLElement>) 
       // 3秒間待つ
       const time = setTimeout(() => {
 
-          this.style.cursor = "unset"
-          this.title = ""
+        this.style.cursor = "unset"
+        this.title = ""
         if ((parent.document.querySelector(`body>div[data-ref="${logseq.baseInfo.id}"]`) as Node | null)// if the preview is already open
           // limit the number of previews to one
           && logseq.settings!.limitPreview === true) {
@@ -114,7 +116,7 @@ const observer = () => {
    * Selects the target node in the DOM tree using a CSS selector and returns it as a Node object.
    * @returns The target node as a Node object.
    */
-  const targetNode = parent.document.querySelector("body>div#root>div>main>div#app-container") as Node
+  const targetNode = parent.document.body.querySelector("div#root>div>main>div#app-container") as Node
 
   const observer = new MutationObserver(() => {
 
@@ -150,7 +152,6 @@ const observer = () => {
  * It initializes the plugin settings and sets up the necessary event listeners.
  */
 const main = async () => {
-  console.info(`#${pluginId}: MAIN`)
 
   // localization
   // await l10nSetup({
@@ -192,13 +193,91 @@ const main = async () => {
   previewBlock()
 
   logseq.provideStyle(`
-  body>div[data-ref="${logseq.baseInfo.id}"]:hover {
+  body>div[data-ref="preview-image"]:hover {
     outline: 6px solid var(--ls-quaternary-background-color);
     outline-offset: 6px;
   }
+  body>div#root>div>main {
+    & article>div[data-id="preview-image"] {
+      & div.heading-item {
+        margin-top: 3em;
+        border-top-width: 1px;
+        border-bottom-width: 0;
+        padding-top: 1em;
+        &>h2 {
+          margin-bottom: 0.5em;
+        }
+      }
+      & div.desc-item {
+        & p {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+      }
+    }
+    & div.block-content div.asset-container button.asset-action-btn {
+      font-size: .8em;
+    }
+  }
 `)
 
+
+  if (logseq.settings!.imageSizeMaxBoolean === true) {
+    //新しい計算方法で求めて変更する
+    if (logseq.settings?.imageSizeHome !== "")
+      logseq.updateSettings({
+        imageSizeMaxHome: calcRangeBarForSettingOnce(
+          300,
+          800,
+          logseq.settings?.imageSizeHome
+        ),
+        imageSizeHome: "",
+      })
+    if (logseq.settings?.imageSizePage !== "")
+      logseq.updateSettings({
+        imageSizeMaxPage: calcRangeBarForSettingOnce(
+          300,
+          1200,
+          logseq.settings?.imageSizePage
+        ),
+        imageSizePage: "",
+      })
+  }
+
+
+  imageSizeLimit(logseq.settings?.imageSizeMaxHome, logseq.settings?.imageSizeMaxPage)
+
+
+  logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
+
+    if (
+      oldSet.imageSizeMaxHome !== newSet.imageSizeMaxHome
+      || oldSet.imageSizeMaxPage !== newSet.imageSizeMaxPage
+    ) {
+      try {
+        removeProvideStyle(keyImageSize)
+      } finally {
+        if (newSet.imageSizeMaxBoolean === true)
+          imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
+      }
+    }
+
+    if (oldSet.imageSizeMaxBoolean === false && newSet.imageSizeMaxBoolean === true)
+      imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
+    else
+      if (oldSet.imageSizeMaxBoolean === true && newSet.imageSizeMaxBoolean === false)
+        removeProvideStyle(keyImageSize)
+
+  })
+
 } //end main
+
+
+const imageSizeLimit = (home: number, page: number) =>
+  logseq.provideStyle({
+    key: keyImageSize,
+    style: CSSimageSize(home, page),
+  })
 
 
 logseq.ready(main).catch(console.error)

@@ -7,18 +7,63 @@ import { t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
  * @returns An array of settings objects.
  */
 export const pluginSettings = () => logseq.useSettingsSchema([
+
+  // Image Size feature
+
+  {
+    key: "imageSizeMaxHeading",
+    type: "heading",
+    title: t("\"Limit large image size\" feature"),
+    description: "",
+    default: "",
+  },
+  {// enable: set image size max
+    key: "imageSizeMaxBoolean",
+    type: "boolean",
+    title: t("Enable"),
+    description: t("false > Maximum size as usual"),
+    default: true,
+  },
+  {
+    key: "imageSizeMaxHome",
+    title: t("Journals > width > large image max-size"),
+    type: "number",
+    default: "45",
+    description: "`300` < `660` default < `800` [px]",
+    inputAs: "range",
+  },
+  {
+    key: "imageSizeMaxPage",
+    title: t("Pages > width > large image max-size"),
+
+    type: "number",
+    default: "45",
+    description: "`300` < `1050` default < `1200` [px]",
+    inputAs: "range",
+  },
+
+
+  // Preview Image feature
+
+  {
+    key: "previewImageHeading",
+    type: "heading",
+    title: t("\"Preview image\" feature"),
+    description: "",
+    default: "",
+  },
   {// preview image enable
     key: "previewImage",
     type: "boolean",
-    title: t("Enable Preview Image"),
-    description: t("False > Disable Preview Image"),
+    title: t("Enable"),
+    description: "",
     default: true,
   },
   {
     // mouse enter ms delay
     key: "mouseEnterDelay",
     type: "enum",
-    title: t("Mouse enter ms delay (The shortest time to appear)"),
+    title: t("[ms] Mouse enter delay (The shortest time to appear)"),
     description: t("Delay before opening preview"),
     default: "1400",
     enumChoices: [
@@ -45,7 +90,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     // mouse leave ms delay
     key: "closeMouseLeaveDelay",
     type: "enum",
-    title: t("Mouse leave ms delay (The shortest time to disappear)"),
+    title: t("[ms] Mouse leave delay (The shortest time to disappear)"),
     description: t("Delay before closing preview"),
     default: "1400",
     enumChoices: [
@@ -59,7 +104,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   {
     key: "timeUntilOff",
     type: "enum",
-    title: t("Time until it does not disappear even if the mouse is removed"),
+    title: t("[ms] Time until it does not disappear even if the mouse is removed"),
     description: t("After this number of seconds has elapsed, it will not disappear even if move the mouse away."),
     default: "3500",
     enumChoices: [
