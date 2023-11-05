@@ -3,15 +3,19 @@
 [English](https://github.com/YU000jp/logseq-plugin-preview-image) | [日本語](https://github.com/YU000jp/logseq-plugin-preview-image/blob/main/README.ja.md)
 
 1. Set size restrictions for large images.
-2. Hover over an image to view a larger preview.
+1. Hover over an image to view a larger preview.
+
+[![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-preview-image)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
+[![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-preview-image?color=blue)](https://github.com/YU000jp/logseq-plugin-preview-image/LICENSE)
+[![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-preview-image/total.svg)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
 
 ## Demo
 
 ## Usage
 
 1. Install the `Preview Image` plugin (available from the Logseq Marketplace).
-2. Place an image in a regular block.
-3. Hover your mouse over the image to see a preview.
+1. Place an image in a regular block.
+1. Hover your mouse over the image to see a preview.
 
 ## Plugin Settings
 

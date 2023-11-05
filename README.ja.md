@@ -5,6 +5,10 @@
 1. 大きな画像に、サイズ制限を設定します。
 1. 画像にカーソルを合わせて、プレビューで大きく表示します。
 
+[![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-preview-image)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
+[![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-preview-image?color=blue)](https://github.com/YU000jp/logseq-plugin-preview-image/LICENSE)
+[![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-preview-image/total.svg)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
+
 ## デモ
 
 ## 使用方法
