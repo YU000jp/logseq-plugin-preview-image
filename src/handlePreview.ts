@@ -1,5 +1,6 @@
 import { t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { key } from "./"
+import { calcRangeBar } from "./lib"
 
 
 /**
@@ -21,7 +22,7 @@ export const handlePreview = async (element: HTMLElement, left: number, top: num
     : Math.floor(Math.random() * 10000).toString().padStart(4, '0')
 
   // preview UI
-  const maxWidth = logseq.settings!.maxWidth * 10 + 200
+  const maxWidth = calcRangeBar(400, 1200, logseq.settings!.previewImageWidth as number) // プレビューの幅を設定する設定項目
   logseq.provideUI({
     key: UIKey,
     template: `

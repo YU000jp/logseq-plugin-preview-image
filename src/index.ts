@@ -2,7 +2,7 @@ import "@logseq/libs"
 import { LSPluginBaseInfo } from "@logseq/libs/dist/LSPlugin.user"
 import { t } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { handlePreview } from "./handlePreview"
-import { CSSimageSize, calcRangeBarForSettingOnce, removeProvideStyle } from "./lib"
+import { CSSimageSize, calcRangeBarOnce, removeProvideStyle } from "./lib"
 import { previewBlock } from "./previewBlock"
 import { pluginSettings } from "./settings"
 // import af from "./translations/af.json";
@@ -226,7 +226,7 @@ const main = async () => {
     //新しい計算方法で求めて変更する
     if (logseq.settings?.imageSizeHome !== "")
       logseq.updateSettings({
-        imageSizeMaxHome: calcRangeBarForSettingOnce(
+        imageSizeMaxHome: calcRangeBarOnce(
           300,
           800,
           logseq.settings?.imageSizeHome
@@ -235,7 +235,7 @@ const main = async () => {
       })
     if (logseq.settings?.imageSizePage !== "")
       logseq.updateSettings({
-        imageSizeMaxPage: calcRangeBarForSettingOnce(
+        imageSizeMaxPage: calcRangeBarOnce(
           300,
           1200,
           logseq.settings?.imageSizePage

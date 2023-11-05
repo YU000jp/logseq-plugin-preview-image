@@ -138,12 +138,12 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   },
   {
     // max width of preview
-    key: "maxWidth",
+    key: "previewImageWidth",
     type: "number",
     title: t("Maximum width of preview"),
-    description: "200px < 1200px",
+    description: "400px < 1200px",
     inputAs: "range",
-    default: "80",
+    default: "60",
   },
   {
     // enable YouTube preview optimization

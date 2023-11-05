@@ -7,7 +7,14 @@ export const removeProvideStyle = (className: string) => {
 }
 
 //for setting UI
-const calcRangeBarForSettingUI = (
+/**
+ * Calculates the range bar value based on the given minimum, maximum, and current value.
+ * @param min - The minimum value of the range bar.
+ * @param max - The maximum value of the range bar.
+ * @param value - The current value of the range bar.
+ * @returns The calculated range bar value.
+ */
+export const calcRangeBar = (
   min: number,
   max: number,
   value: number
@@ -17,7 +24,7 @@ const calcRangeBarForSettingUI = (
 }
 
 //レンジバー導入のため設定数値の互換用
-export const calcRangeBarForSettingOnce = (
+export const calcRangeBarOnce = (
   min: number,
   max: number,
   value: number
@@ -29,11 +36,11 @@ export const CSSimageSize = (home: number, page: number): string => {
   //Page: 300px < number > 1200px
   return `
 body[data-page="home"]>div#root>div>main div.asset-container img {
-    max-width: ${calcRangeBarForSettingUI(300, 800, home)}px;
+    max-width: ${calcRangeBar(300, 800, home)}px;
     object-fit: scale-down;
 }
 body[data-page="page"]>div#root>div>main div.asset-container img {
-    max-width: ${calcRangeBarForSettingUI(300, 1200, page)}px;
+    max-width: ${calcRangeBar(300, 1200, page)}px;
     object-fit: scale-down;
 }
 `
