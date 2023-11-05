@@ -21,7 +21,7 @@
 
 ## Plugin Settings
 
-- "Limit Size for Large Images" Feature > Enabled
+- "Limit Size for Large Images" Feature > Enable
   - `true` (default)
   - `false` > Normal maximum size
 
@@ -33,7 +33,7 @@
   - `45` (default)
   - `300` < `1050` (default) < `1200` [px]
 
-- "Image Preview" Feature > Enabled
+- "Image Preview" Feature > Enable
   - `true` (default)
   - `false` > Normal maximum size
 
