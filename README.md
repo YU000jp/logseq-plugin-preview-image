@@ -11,6 +11,8 @@
 
 ## Demo
 
+![previewImage](https://github.com/YU000jp/logseq-plugin-preview-image/assets/111847207/ad7cafe2-c449-4807-b14a-b5315c0a639e)
+
 ## Usage
 
 1. Install the `Preview Image` plugin (available from the Logseq Marketplace).
