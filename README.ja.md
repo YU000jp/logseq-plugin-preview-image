@@ -9,13 +9,15 @@
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-preview-image?color=blue)](https://github.com/YU000jp/logseq-plugin-preview-image/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-preview-image/total.svg)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
 
-## デモ
+![previewImage](https://github.com/YU000jp/logseq-plugin-preview-image/assets/111847207/b60a59ac-8ead-4272-b286-69302e5acb9e)
 
 ## 使用方法
 
 1. `Preview Image` プラグインをインストールします（Logseq マーケットプレースから入手できます）。
 1. 通常のブロックに何か画像を配置します。
 1. その画像にマウスを合わせるとプレビューが表示されます。
+
+---
 
 ## プラグイン設定
 
@@ -66,6 +68,8 @@
 - YouTubeのプレビュー最適化を有効にする
   - `true`（デフォルト）
   - `false` > 通常の最大サイズ
+
+---
 
 ## 情報
 
