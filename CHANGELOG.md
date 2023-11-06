@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.1.0...v1.1.1) (2023-11-06)
+
+
+### Bug Fixes
+
+* **bug:** CSS not applied to menu ([d270415](https://github.com/YU000jp/logseq-plugin-preview-image/commit/d2704156d78a94afa89f543ee52f9cd0ab901ff1))
+
 # [1.1.0](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.0.0...v1.1.0) (2023-11-05)
 
 
