@@ -193,12 +193,12 @@ const main = async () => {
   previewBlock()
 
   logseq.provideStyle(`
-  body>div[data-ref="preview-image"]:hover {
+  body>div[data-ref="logseq-plugin-preview-image"]:hover {
     outline: 6px solid var(--ls-quaternary-background-color);
     outline-offset: 6px;
   }
   body>div#root>div>main {
-    & article>div[data-id="preview-image"] {
+    & article>div[data-id="logseq-plugin-preview-image"] {
       & div.heading-item {
         margin-top: 3em;
         border-top-width: 1px;

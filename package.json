@@ -4,7 +4,7 @@
   "repository": "https://github.com/YU000jp/logseq-plugin-preview-image",
   "author": "YU000jp",
   "logseq": {
-    "id": "preview-image",
+    "id": "logseq-plugin-preview-image",
     "icon": "./icon.svg",
     "title": "Preview Image"
   },
