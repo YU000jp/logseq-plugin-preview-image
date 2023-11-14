@@ -1,4 +1,4 @@
-# Logseq Plugin: Preview Image
+# Logseq Plugin: *Preview Image*
 
 [English](https://github.com/YU000jp/logseq-plugin-preview-image) | [日本語](https://github.com/YU000jp/logseq-plugin-preview-image/blob/main/README.ja.md)
 
