@@ -13,7 +13,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   {
     key: "imageSizeMaxHeading",
     type: "heading",
-    title: t("\"Limit large image size\" feature"),
+    title: t("'Limit large image size' feature"),
     description: "",
     default: "",
   },
@@ -48,7 +48,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   {
     key: "previewImageHeading",
     type: "heading",
-    title: t("\"Preview image\" feature"),
+    title: t("'Preview image' feature"),
     description: "",
     default: "",
   },
@@ -80,10 +80,8 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     // close the Preview when mouse leave it
     key: "closePreviewMouseLeave",
     type: "boolean",
-    title: t("Close the preview when mouse leave it"),
-    description: t(
-      "If this setting is disabled, the preview will not disappear. You will need to close it manually."
-    ),
+    title: t("Close the preview when mouse leave it."),
+    description: t("When the cursor is a ➖ mark, if move it outside the preview window, the window will disappear. If this setting is disabled, the preview will not disappear. You will need to close it manually."),
     default: true,
   },
   {
@@ -131,9 +129,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     key: "closePreviewWhenOpenPage",
     type: "boolean",
     title: t("Close the preview when open other page"),
-    description: t(
-      "False > The preview will be retained even if you open another page."
-    ),
+    description: t("False > The preview will be retained even if you open another page."),
     default: true,
   },
   {
@@ -150,7 +146,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     key: "youtubePreview",
     type: "boolean",
     title: t("Enable YouTube preview optimization"),
-    description: "",
+    description: t("Prevents it from becoming horizontally long."),
     default: true,
   },
 ])
