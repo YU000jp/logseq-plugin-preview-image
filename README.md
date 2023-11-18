@@ -66,10 +66,6 @@
   - `60` (default)
   - 400px < 1200px
 
-- Enable YouTube Preview Optimization
-  - `true` (default)
-  - `false` > Normal maximum size
-
 ## Information
 
 Icon > [icooon-mono.com](https://icooon-mono.com/00039-%e6%a4%9c%e7%b4%a2%e7%94%a8%e3%81%ae%e8%99%ab%e7%9c%bc%e9%8f%a1%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3%e7%b4%a0%e6%9d%90/)
