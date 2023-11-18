@@ -31,10 +31,10 @@ export const handlePreview = async (element: HTMLElement, left: number, top: num
               ${element.outerHTML}
               </div>
             </div>
+            <style>
             ${logseq.settings!.youtubePreview === false
         ? ""
         : `
-            <style>
               /* YouTube preview optimization */
               body>div#${logseq.baseInfo.id}--${UIKey}>div.ls-ui-float-content>div:has(iframe[src*="youtube"]) {
                 position: relative;
@@ -54,7 +54,8 @@ export const handlePreview = async (element: HTMLElement, left: number, top: num
                   height: 100%;
                 }
               }
-              ${flag.uuid ? `
+            `}
+            ${flag.uuid ? `
               body>div#root>div {
                 &.light-theme>main>div span#dot-${flag.uuid}{
                     outline: 2px solid var(--ls-link-ref-text-color);
@@ -65,7 +66,6 @@ export const handlePreview = async (element: HTMLElement, left: number, top: num
               }
               ` : ""}
             </style>
-            `}
           `,
 
     style: {
