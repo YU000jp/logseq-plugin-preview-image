@@ -76,3 +76,5 @@
 アイコン > [icooon-mono.com](https://icooon-mono.com/00039-%e6%a4%9c%e7%b4%a2%e7%94%a8%e3%81%ae%e8%99%ab%e7%9c%bc%e9%8f%a1%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3%e7%b4%a0%e6%9d%90/)
 
 製作者 > [@YU000jp](https://github.com/YU000jp)
+
+<a href="https://www.buymeacoffee.com/yu000japan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="🍌Buy Me A Coffee" style="height: 42px;width: 152px" ></a>
