@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.1.1...v1.2.0) (2023-11-18)
+
+
+### Features
+
+* **Translations:** For plugin settings ([2ab0ee0](https://github.com/YU000jp/logseq-plugin-preview-image/commit/2ab0ee0d13a63d03e4a8bea8ff7ca63ba4c6adfb))
+
 ## [1.1.1](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.1.0...v1.1.1) (2023-11-06)
 
 
