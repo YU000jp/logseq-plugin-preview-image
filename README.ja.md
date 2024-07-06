@@ -2,8 +2,8 @@
 
 [English](https://github.com/YU000jp/logseq-plugin-preview-image) | [日本語](https://github.com/YU000jp/logseq-plugin-preview-image/blob/main/README.ja.md)
 
-1. 大きな画像に、サイズ制限を設定します。
-1. 画像にカーソルを合わせて、プレビューで大きく表示します。
+1. 「大きな画像のサイズを制限する」機能
+1. 「画像にカーソルを合わせて、画像をプレビューする」機能
 
 [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-preview-image)](https://github.com/YU000jp/logseq-plugin-preview-image/releases)
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-preview-image?color=blue)](https://github.com/YU000jp/logseq-plugin-preview-image/LICENSE)
