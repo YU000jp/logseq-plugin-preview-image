@@ -24,7 +24,6 @@ import tr from "./translations/tr.json"
 import uk from "./translations/uk.json"
 import zhCN from "./translations/zh-CN.json"
 import zhHant from "./translations/zh-Hant.json"
-const pluginId = logseq.baseInfo.id
 export const key = "dialog"
 const keyImageSize = "imageSize"
 
@@ -36,11 +35,9 @@ let processing = false // prevent duplicate call
  * @param flag - An optional object containing a `pageLoad` boolean flag to indicate if the page is being loaded.
  */
 const init = (flag: { pageLoad?: boolean }, nodeList?: NodeListOf<HTMLElement>) => {
-  if (
-    flag &&
+  if (flag &&
     flag.pageLoad === true &&
-    logseq.settings!.closePreviewWhenOpenPage === true
-  ) {
+    logseq.settings!.closePreviewWhenOpenPage === true) {
     const ele = parent.document.querySelector(
       `body>div[data-ref="${logseq.baseInfo.id}"]`
     ) as HTMLDivElement | null
@@ -250,24 +247,21 @@ const main = async () => {
 
   logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
 
-    if (
-      oldSet.imageSizeMaxHome !== newSet.imageSizeMaxHome
-      || oldSet.imageSizeMaxPage !== newSet.imageSizeMaxPage
-    ) {
+    if (oldSet.imageSizeMaxHome !== newSet.imageSizeMaxHome
+      || oldSet.imageSizeMaxPage !== newSet.imageSizeMaxPage)
       try {
         removeProvideStyle(keyImageSize)
       } finally {
         if (newSet.imageSizeMaxBoolean === true)
           imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
       }
-    }
-
-    if (oldSet.imageSizeMaxBoolean === false && newSet.imageSizeMaxBoolean === true)
+    if (oldSet.imageSizeMaxBoolean === false
+      && newSet.imageSizeMaxBoolean === true)
       imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
     else
-      if (oldSet.imageSizeMaxBoolean === true && newSet.imageSizeMaxBoolean === false)
+      if (oldSet.imageSizeMaxBoolean === true
+        && newSet.imageSizeMaxBoolean === false)
         removeProvideStyle(keyImageSize)
-
   })
 
 } //end main
