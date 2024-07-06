@@ -200,7 +200,7 @@ const main = async () => {
         imageSizeMaxHome: calcRangeBarOnce(
           300,
           800,
-          logseq.settings?.imageSizeHome
+          logseq.settings?.imageSizeHome as number
         ),
         imageSizeHome: "",
       })
@@ -209,14 +209,14 @@ const main = async () => {
         imageSizeMaxPage: calcRangeBarOnce(
           300,
           1200,
-          logseq.settings?.imageSizePage
+          logseq.settings?.imageSizePage as number
         ),
         imageSizePage: "",
       })
   }
 
 
-  imageSizeLimit(logseq.settings?.imageSizeMaxHome, logseq.settings?.imageSizeMaxPage)
+  imageSizeLimit(logseq.settings?.imageSizeMaxHome as number, logseq.settings?.imageSizeMaxPage as number)
 
 
   logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
@@ -227,11 +227,11 @@ const main = async () => {
         removeProvideStyle(keyImageSize)
       } finally {
         if (newSet.imageSizeMaxBoolean === true)
-          imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
+          imageSizeLimit(newSet.imageSizeMaxHome as number, newSet.imageSizeMaxPage as number)
       }
     if (oldSet.imageSizeMaxBoolean === false
       && newSet.imageSizeMaxBoolean === true)
-      imageSizeLimit(newSet.imageSizeMaxHome, newSet.imageSizeMaxPage)
+      imageSizeLimit(newSet.imageSizeMaxHome as number, newSet.imageSizeMaxPage as number)
     else
       if (oldSet.imageSizeMaxBoolean === true
         && newSet.imageSizeMaxBoolean === false)
