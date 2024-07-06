@@ -4,7 +4,7 @@ import { handlePreview } from "./handlePreview"
 
 let processing = false // prevent duplicate call
 export const previewBlock = () =>
-    logseq.Editor.registerBlockContextMenuItem(t("Preview this block"), async ({ uuid }) => {
+    logseq.Editor.registerBlockContextMenuItem(t("Zoom this block"), async ({ uuid }) => {
         if (processing) return // prevent duplicate call
         const blockElement = parent.document.querySelector(
             logseq.settings!.blockZoomIncludeSubBlock === true ?

@@ -13,7 +13,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   {
     key: "imageSizeMaxHeading",
     type: "heading",
-    title: t("'Limit large image size' feature"),
+    title: t("'Limit maximum image size' feature"),
     description: "",
     default: "",
   },
@@ -21,7 +21,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
     key: "imageSizeMaxBoolean",
     type: "boolean",
     title: t("Enable"),
-    description: t("false > Maximum size as usual"),
+    description: "",
     default: true,
   },
   {
@@ -68,7 +68,7 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   {
     key: "previewImageHeading",
     type: "heading",
-    title: t("'Preview image' feature"),
+    title: t("'Image Zoom' feature"),
     description: "",
     default: "",
   },

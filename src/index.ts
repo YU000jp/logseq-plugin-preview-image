@@ -24,6 +24,7 @@ import tr from "./translations/tr.json"
 import uk from "./translations/uk.json"
 import zhCN from "./translations/zh-CN.json"
 import zhHant from "./translations/zh-Hant.json"
+import CSS from "./style.css?inline"
 export const key = "dialog"
 const keyImageSize = "imageSize"
 
@@ -35,9 +36,9 @@ let processing = false // prevent duplicate call
  * @param flag - An optional object containing a `pageLoad` boolean flag to indicate if the page is being loaded.
  */
 const init = (flag: { pageLoad?: boolean }, nodeList?: NodeListOf<HTMLElement>) => {
-  if (flag &&
-    flag.pageLoad === true &&
-    logseq.settings!.closePreviewWhenOpenPage === true) {
+  if (flag
+    && flag.pageLoad === true
+    && logseq.settings!.closePreviewWhenOpenPage === true) {
     const ele = parent.document.querySelector(
       `body>div[data-ref="${logseq.baseInfo.id}"]`
     ) as HTMLDivElement | null
@@ -189,34 +190,7 @@ const main = async () => {
   // preview block
   previewBlock()
 
-  logseq.provideStyle(`
-  body>div[data-ref="logseq-plugin-preview-image"]:hover {
-    outline: 6px solid var(--ls-quaternary-background-color);
-    outline-offset: 6px;
-  }
-  body>div#root>div>main {
-    & article>div[data-id="logseq-plugin-preview-image"] {
-      & div.heading-item {
-        margin-top: 3em;
-        border-top-width: 1px;
-        border-bottom-width: 0;
-        padding-top: 1em;
-        &>h2 {
-          margin-bottom: 0.5em;
-        }
-      }
-      & div.desc-item {
-        & p {
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-        }
-      }
-    }
-    & div.block-content div.asset-container button.asset-action-btn {
-      font-size: .8em;
-    }
-  }
-`)
+  logseq.provideStyle(CSS)
 
 
   if (logseq.settings!.imageSizeMaxBoolean === true) {

@@ -1,0 +1,75 @@
+body>div[data-ref="logseq-plugin-preview-image"]:hover {
+  outline: 6px solid var(--ls-quaternary-background-color);
+  outline-offset: 6px;
+}
+
+body>div#root>div>main {
+  & article>div[data-id="logseq-plugin-preview-image"] {
+    & div.heading-item {
+      margin-top: 3em;
+      border-top-width: 1px;
+      border-bottom-width: 0;
+      padding-top: 1em;
+
+      &>h2 {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    & div.desc-item {
+      & p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+      }
+
+      &[data-key="imageSizeMaxBoolean"]:has(input.form-checkbox:not(:checked)) {
+        &+div.desc-item[data-key="imageSizeMaxHome"] {
+          display: none;
+
+          &+div.desc-item[data-key="imageSizeMaxPage"] {
+            display: none;
+          }
+        }
+      }
+
+      &[data-key="previewImage"]:has(input.form-checkbox:not(:checked)) {
+        &+div.desc-item[data-key="mouseEnterDelay"] {
+          display: none;
+
+          &+div.desc-item[data-key="closePreviewMouseLeave"] {
+            display: none;
+
+            &+div.desc-item[data-key="closeMouseLeaveDelay"] {
+              display: none;
+
+              &+div.desc-item[data-key="timeUntilOff"] {
+                display: none;
+
+                &+div.desc-item[data-key="limitPreview"] {
+                  display: none;
+
+                  &+div.desc-item[data-key="closePreviewWhenOpenPage"] {
+                    display: none;
+
+                    &+div.desc-item[data-key="previewImageWidth"] {
+                      display: none;
+
+                      &+div.desc-item[data-key="youtubePreview"] {
+                        display: none;
+
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & div#main-content-container div.block-content div.asset-container button.asset-action-btn {
+    font-size: .8em;
+  }
+}
