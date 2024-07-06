@@ -43,6 +43,26 @@ export const pluginSettings = () => logseq.useSettingsSchema([
   },
 
 
+  // Block Zoom feature
+
+  {
+    key: "previewImageHeading",
+    type: "heading",
+    title: t("'Block Zoom' feature"),
+    // 箇条書きのコンテキストメニューに「ブロックをズームする」を追加します。
+    description: t("Add 'Zoom this block' to the context menu of a bullet."),
+    default: "",
+  },
+  // サブブロックも含むかどうか
+  {
+    key: "blockZoomIncludeSubBlock",
+    type: "boolean",
+    title: t("Include sub-blocks"),
+    // オフにすると、ズームされるのは親ブロックのみです。
+    description: t("If off, only the parent block will be zoomed."),
+    default: true,
+  },
+
   // Preview Image feature
 
   {
