@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.2.0...v1.3.0) (2024-07-06)
+
+
+### Features
+
+* **Add:** 'Block Zoom' feature > Include sub-blocks ([e30af17](https://github.com/YU000jp/logseq-plugin-preview-image/commit/e30af173b31a59d4715572d293bee197f63883fe))
+
 # [1.2.0](https://github.com/YU000jp/logseq-plugin-preview-image/compare/v1.1.1...v1.2.0) (2023-11-18)
 
 
